@@ -1,4 +1,6 @@
 let squareContainer = document.querySelector('.square-container');
+//  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+ let kay = 0;
 var students = [
     ["Alara Manguoğlu", "AlaraManguoglu", "http://alaramanguoglu.works/" ],
     ["Alp Ege Koç", "AlpEgeKoc", "http://alpege.rocks/" ],
@@ -15,10 +17,51 @@ var students = [
     ["Selen Elçin Erşan", "SelenElcinErsan", "http://Selenelcinersan.works/" ],
     ["Sena Ezer", "SenaEzer", "http://senaezer.works/" ],
     ["Tuğçe Sözen", "TugceSozen", "http://tugcesozen.works/" ],
-    ["Umay Demirel", "UmayDemirel", "http://umay.works/" ],
+    ["Umay Demirel", "UmayDemirel", "https://umay.works/" ],
     ["Utku Erturkan", "UtkuErturkan", "http://utkuerturkan.works/" ],
     ["Yasemin Çetik", "YaseminCetik", "http://www.yasemincetik.me/" ]
 ]
+
+if (!annyang) {
+    console.log("Speech Recognition is not supported");
+  } else if (annyang) {
+    // Let's define our first command. First the text we expect, and then the function it should call
+    // annyang.debug();
+    annyang.setLanguage('tr-TR');
+     var commands = {
+             'Merhaba *tag': readTurkishText,
+             '*tag in': asagiKaydir,
+             '*tag çık': yukariKaydir,
+          
+    }; 
+    // Add our commands to annyang
+    annyang.addCommands(commands);
+    // Start listening. You can call this here, or attach this call to an event, button, etc.
+    // annyang.start();
+    annyang.start({ autoRestart: true, continuous: false });
+}
+
+
+function readTurkishText(tag) {
+    let name = "";
+    // console.log(tag + " : " + name );
+    for (var i = 0; i < students.length; i++) {
+         tag = tag.toUpperCase();
+         name = students[i][0].toUpperCase();
+        // console.log(tag + " : " + name );
+        if ( name.includes(tag) ) { 
+            let lnk= students[i][2];
+            window.open(lnk,"_self");
+            // console.log(lnk);
+        }
+    }
+}
+
+
+function asagiKaydir() {   window.scrollBy(0,1500);}
+function yukariKaydir() {   window.scrollBy(0,-1500);}
+    // document.getElementById("hello").innerText = tag;
+
 
 squareContainer.innerHTML = "";
 for (var i = 0; i < students.length; i++) {
